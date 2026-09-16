@@ -1,0 +1,363 @@
+/* ==========================================================================
+   AYUSH THAKUR // PERSONAL DEVELOPER PORTFOLIO
+   Aesthetic: Dark Futuristic Developer × Japanese Minimalism × Subtle Anime Atmosphere
+   Refined RGB Light System: Subdued, Sophisticated & Balanced
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Surfaces - Obsidian Black & Deep Charcoal */
+  --bg-primary: #050507;
+  --bg-secondary: #08080d;
+  --bg-tertiary: #0c0c14;
+  --bg-card: rgba(11, 11, 18, 0.72);
+  --bg-card-hover: rgba(16, 16, 26, 0.88);
+  
+  /* Restrained RGB Accent Palette */
+  --rgb-cyan: #00e5ff;
+  --rgb-blue: #3b82f6;
+  --rgb-violet: #8b5cf6;
+  --rgb-magenta: #d946ef;
+  --rgb-pink: #ec4899;
+
+  /* Subtle Soft Glows */
+  --glow-cyan: rgba(0, 229, 255, 0.14);
+  --glow-blue: rgba(59, 130, 246, 0.14);
+  --glow-violet: rgba(139, 92, 246, 0.14);
+  --glow-magenta: rgba(217, 70, 239, 0.14);
+  --glow-pink: rgba(236, 72, 153, 0.14);
+
+  /* Gradients */
+  --gradient-rgb: linear-gradient(135deg, #00e5ff 0%, #3b82f6 25%, #8b5cf6 50%, #d946ef 75%, #ec4899 100%);
+  --gradient-rgb-h: linear-gradient(90deg, #00e5ff 0%, #3b82f6 25%, #8b5cf6 50%, #d946ef 75%, #ec4899 100%);
+  --gradient-blue-violet: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --gradient-violet-pink: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --gradient-cyan-blue: linear-gradient(135deg, #00e5ff 0%, #3b82f6 100%);
+  --gradient-magenta-pink: linear-gradient(135deg, #d946ef 0%, #ec4899 100%);
+
+  /* Typography Colors */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.68);
+  --text-muted: rgba(255, 255, 255, 0.42);
+  
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-active: rgba(255, 255, 255, 0.18);
+
+  /* Modern Sharp Typography */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Outfit', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Transitions & Layout */
+  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --container-max: 1220px;
+  --nav-height: 70px;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background-color: var(--bg-primary);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(0, 229, 255, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 45%, rgba(139, 92, 246, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 75% 55% at 15% 85%, rgba(217, 70, 239, 0.05) 0%, transparent 60%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--rgb-cyan);
+  color: #000;
+}
+
+/* --- AMBIENT REFINED RGB LIGHT BLOOMS (Subtle & Atmospheric) --- */
+.ambient-rgb-blobs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.rgb-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.10; /* Rich, elegant atmospheric depth without text wash */
+  will-change: transform;
+}
+
+.blob-1 {
+  top: -8%;
+  left: 18%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, var(--rgb-cyan) 0%, var(--rgb-blue) 100%);
+  animation: blob-drift-1 26s ease-in-out infinite alternate;
+}
+
+.blob-2 {
+  top: 42%;
+  right: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--rgb-violet) 0%, var(--rgb-magenta) 100%);
+  animation: blob-drift-2 30s ease-in-out infinite alternate;
+}
+
+.blob-3 {
+  bottom: -12%;
+  left: 28%;
+  width: 580px;
+  height: 580px;
+  background: radial-gradient(circle, var(--rgb-magenta) 0%, var(--rgb-pink) 100%);
+  animation: blob-drift-3 32s ease-in-out infinite alternate;
+}
+
+@keyframes blob-drift-1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(60px, 80px) scale(1.08); }
+}
+
+@keyframes blob-drift-2 {
+  0% { transform: translate(0, 0) scale(1.05); }
+  100% { transform: translate(-80px, 50px) scale(0.92); }
+}
+
+@keyframes blob-drift-3 {
+  0% { transform: translate(0, 0) scale(0.95); }
+  100% { transform: translate(70px, -60px) scale(1.06); }
+}
+
+/* Background Canvas */
+#canvas-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+/* High-Tech Cyber Dot Matrix Overlay */
+.cyber-grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 1px 1px, rgba(0, 229, 255, 0.14) 1px, transparent 0);
+  background-size: 38px 38px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.22) 75%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.22) 75%, transparent 100%);
+  opacity: 0.7;
+}
+
+.scanline-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  opacity: 0.04; /* Subdued, zero text interference */
+}
+
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Desktop RGB Cursor Follower (PRESERVED INTERACTION) */
+.rgb-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.06) 0%, rgba(139, 92, 246, 0.03) 45%, transparent 75%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+  transition: width 0.28s ease, height 0.28s ease, opacity 0.28s ease;
+  will-change: transform;
+}
+
+.rgb-cursor.hovering {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.09) 0%, rgba(139, 92, 246, 0.05) 45%, transparent 75%);
+}
+
+@media (pointer: coarse) {
+  .rgb-cursor {
+    display: none !important;
+  }
+}
+
+/* Typography Utilities */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.font-display { font-family: var(--font-display); }
+.font-heading { font-family: var(--font-heading); }
+.font-mono { font-family: var(--font-mono); }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2.25rem;
+  }
+}
+
+/* Section Structure & Refined Gradient Accent Lines */
+.section {
+  padding: 5.5rem 0;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 7.5rem 0;
+  }
+}
+
+.section-header {
+  margin-bottom: 3.25rem;
+  position: relative;
+}
+
+.section-num {
+  font-family: var(--font-mono);
+  font-size: 0.775rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.4rem;
+  display: block;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3.8vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.section-line {
+  display: block;
+  height: 1px;
+  margin-top: 0.85rem;
+  width: 100%;
+  opacity: 0.45;
+}
+
+/* Section Accent Transitions (Subdued & Clean) */
+.hero-line {
+  background: linear-gradient(90deg, var(--rgb-cyan) 0%, var(--rgb-violet) 45%, transparent 100%);
+}
+.about-line {
+  background: linear-gradient(90deg, var(--rgb-blue) 0%, var(--rgb-violet) 45%, transparent 100%);
+}
+.skills-line {
+  background: linear-gradient(90deg, var(--rgb-violet) 0%, var(--rgb-pink) 45%, transparent 100%);
+}
+.projects-line {
+  background: linear-gradient(90deg, var(--rgb-cyan) 0%, var(--rgb-blue) 30%, var(--rgb-magenta) 60%, transparent 100%);
+}
+.journey-line {
+  background: linear-gradient(90deg, var(--rgb-blue) 0%, var(--rgb-violet) 45%, var(--rgb-magenta) 90%);
+}
+.contact-line {
+  background: linear-gradient(90deg, var(--rgb-magenta) 0%, var(--rgb-pink) 45%, var(--rgb-cyan) 90%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rgb-violet);
+}

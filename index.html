@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayush Thakur // CS &amp; AI Developer</title>
+  <meta name="description" content="Personal developer portfolio of Ayush Thakur — Computer Science & AI student at VIT Pune. Building software, Android applications, and ideas into reality.">
+  <meta name="keywords" content="Ayush Thakur, VIT Pune, Computer Science, Artificial Intelligence, Android Developer, Java, Python, C++, PHP">
+  <meta name="author" content="Ayush Thakur">
+  
+  <!-- OpenGraph / Social Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ayush Thakur // CS &amp; AI Developer">
+  <meta property="og:description" content="Computer Science & AI student building software, Android applications, and ideas into reality.">
+  <meta name="theme-color" content="#050507">
+
+  <!-- Favicon SVG (Inline RGB Prism Emblem) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23050507'/><polygon points='50,16 86,80 14,80' fill='none' stroke='url(%23g)' stroke-width='8'/><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2300F5FF'/><stop offset='50%25' stop-color='%238B5CF6'/><stop offset='100%25' stop-color='%23FF4ECD'/></linearGradient></defs></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+  <!-- Ambient RGB Light Blooms & Cursor -->
+  <div class="ambient-rgb-blobs">
+    <div class="rgb-blob blob-1"></div>
+    <div class="rgb-blob blob-2"></div>
+    <div class="rgb-blob blob-3"></div>
+  </div>
+
+  <div class="rgb-cursor" aria-hidden="true"></div>
+  <canvas id="canvas-bg"></canvas>
+  <div class="cyber-grid-overlay" aria-hidden="true"></div>
+  <div class="scanline-overlay"></div>
+  <div class="noise-overlay"></div>
+
+  <!-- SITE HEADER / MINIMAL FROSTED HUD -->
+  <header class="site-header">
+    <div class="container nav-container">
+      
+      <!-- Brand Identifier -->
+      <a href="#hero" class="brand" aria-label="Ayush Thakur Home">
+        <span class="brand-bracket">&lt;</span>AYUSH<span class="brand-dot">.</span>DEV<span class="brand-bracket">/&gt;</span>
+        <span class="brand-sub">VIT PUNE</span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#journey" class="nav-link">Journey</a></li>
+          <li><a href="#terminal" class="nav-link">Shell</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- HUD Controls -->
+      <div class="nav-actions">
+        <!-- SFX Synthesizer Toggle -->
+        <button id="sfx-toggle" class="hud-btn" title="Toggle cybernetic audio feedback" aria-label="Toggle Sound Effects">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <span>SFX: <span class="sfx-status">OFF</span></span>
+        </button>
+
+        <!-- GitHub Quick Icon -->
+        <a href="https://github.com/ayush-justdev" target="_blank" rel="noopener noreferrer" class="hud-btn" title="GitHub Profile">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+
+        <!-- Mobile Menu Trigger -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-nav" class="mobile-nav">
+    <a href="#hero" class="nav-link">// 00. HOME</a>
+    <a href="#about" class="nav-link">// 01. ABOUT</a>
+    <a href="#skills" class="nav-link">// 02. SKILLS</a>
+    <a href="#projects" class="nav-link">// 03. PROJECTS</a>
+    <a href="#journey" class="nav-link">// 04. JOURNEY</a>
+    <a href="#terminal" class="nav-link">// 05. SHELL</a>
+    <a href="#contact" class="nav-link">// 06. CONTACT</a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="content-wrapper">
+
+    <!-- HERO SECTION // PATH DRAWING CENTERPIECE -->
+    <section id="hero" class="hero-section">
+      <div class="hero-inner">
+        
+        <!-- Eyebrow -->
+        <div class="hero-eyebrow reveal-init">
+          <span class="eyebrow-dot"></span>
+          <span>CS &amp; AI • DEVELOPER</span>
+        </div>
+
+        <!-- Path Drawing SVG Name Centerpiece -->
+        <div class="path-drawing-container reveal-init delay-1" title="Click to replay path drawing">
+          <div class="hero-name-ambient-glow" aria-hidden="true"></div>
+
+          <svg 
+            class="path-drawing-svg" 
+            viewBox="0 0 1020 180" 
+            preserveAspectRatio="xMidYMid meet"
+            role="img" 
+            aria-label="Ayush Thakur"
+          >
+            <defs>
+              <!-- Continuous RGB Light Spectrum Gradient: Cyan -> Electric Blue -> Violet -> Magenta -> Pink -->
+              <linearGradient id="rgb-name-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#00F5FF"/>
+                <stop offset="25%" stop-color="#3B82F6"/>
+                <stop offset="50%" stop-color="#8B5CF6"/>
+                <stop offset="75%" stop-color="#D946EF"/>
+                <stop offset="100%" stop-color="#FF4ECD"/>
+              </linearGradient>
+
+              <!-- Layered Soft Glow Filter -->
+              <filter id="path-glow-filter" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="4.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Vector Glyph Stroke for AYUSH THAKUR -->
+            <text
+              x="50%"
+              y="55%"
+              text-anchor="middle"
+              dominant-baseline="central"
+              stroke="url(#rgb-name-gradient)"
+              stroke-width="2.6"
+              fill="rgba(255, 255, 255, 0.04)"
+              filter="url(#path-glow-filter)"
+              font-family="'Outfit', 'Space Grotesk', sans-serif"
+              font-size="80"
+              font-weight="800"
+              letter-spacing="0.06em"
+            >AYUSH THAKUR</text>
+          </svg>
+        </div>
+
+        <!-- Tagline -->
+        <p class="hero-tagline reveal-init delay-2">
+          Computer Science &amp; AI student building software, Android applications, and ideas into reality.
+        </p>
+
+        <!-- Primary Actions -->
+        <div class="hero-actions reveal-init delay-3">
+          <a href="#projects" class="btn-rgb-primary">
+            <span>VIEW PROJECTS</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+
+          <a href="https://github.com/ayush-justdev" target="_blank" rel="noopener noreferrer" class="btn-rgb-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            <span>GITHUB</span>
+          </a>
+
+          <a href="https://www.linkedin.com/in/ayush-thakur-vit/" target="_blank" rel="noopener noreferrer" class="btn-rgb-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.92 0 1.67-.75 1.67-1.67 0-.93-.75-1.68-1.67-1.68-.93 0-1.68.75-1.68 1.68 0 .92.75 1.67 1.68 1.67m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+            </svg>
+            <span>LINKEDIN</span>
+          </a>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <a href="#about" class="hero-scroll-indicator reveal-init delay-4" aria-label="Scroll to About section">
+          <span>↓ SCROLL</span>
+          <span class="scroll-line-anim"></span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION // IDENTITY -->
+    <section id="about" class="section">
+      <div class="container">
+        
+        <div class="section-header reveal-init">
+          <span class="section-num" style="color: var(--rgb-blue);">01 — ABOUT</span>
+          <h2 class="section-title">
+            ABOUT / AYUSH
+          </h2>
+          <span class="section-line about-line"></span>
+        </div>
+
+        <div class="about-grid">
+          
+          <div class="about-narrative reveal-init delay-1">
+            <p class="lead-text">
+              I am currently pursuing my 
+              <strong style="color: #fff; background: var(--gradient-rgb-h); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">B.Tech in Computer Science &amp; Artificial Intelligence</strong> 
+              at Vishwakarma Institute of Technology (VIT), Pune.
+            </p>
+
+            <p class="about-p">
+              I enjoy engineering practical software projects that bridge core computational theory with real user utility. Whether structuring Android applications, developing responsive web backends, or exploring algorithmic problem solving, I focus on building reliable tools from first principles.
+            </p>
+
+            <p class="about-p">
+              Continuous learning through hands-on development is at the heart of what I do. Every project is an opportunity to dive deeper into system architectures, clean API design, and robust data structures.
+            </p>
+
+            <div style="margin-top: 1rem;">
+              <span style="font-family: var(--font-mono); font-size: 0.725rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rgb-blue); display: block; margin-bottom: 0.6rem;">
+                // PRIMARY INTERESTS &amp; FOCUS
+              </span>
+              <div class="focus-pills">
+                <span class="focus-pill">Artificial Intelligence</span>
+                <span class="focus-pill">Android Development</span>
+                <span class="focus-pill">Software Development</span>
+                <span class="focus-pill">Web Development</span>
+                <span class="focus-pill">API Integration</span>
+                <span class="focus-pill">Technology Exploration</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dossier-card reveal-init delay-2">
+            <div class="dossier-header">
+              <span class="dossier-title">// DEVELOPER_PROFILE</span>
+              <span class="brand-sub">ACTIVE</span>
+            </div>
+
+            <div class="dossier-list">
+              <div class="dossier-item">
+                <span class="dossier-k">Name</span>
+                <span class="dossier-v">Ayush Thakur</span>
+              </div>
+
+              <div class="dossier-item">
+                <span class="dossier-k">Education</span>
+                <span class="dossier-v" style="color: #fff; font-weight: 500;">
+                  B.Tech CS &amp; AI @ VIT Pune
+                </span>
+              </div>
+
+              <div class="dossier-item">
+                <span class="dossier-k">Foundation</span>
+                <span class="dossier-v" style="color: var(--text-secondary);">
+                  Diploma in CO @ Govt. Polytechnic, Jalgaon (83.18%)
+                </span>
+              </div>
+
+              <div class="dossier-item">
+                <span class="dossier-k">Core Focus</span>
+                <span class="dossier-v">Android, AI &amp; Software Systems</span>
+              </div>
+
+              <div class="dossier-item">
+                <span class="dossier-k">Location</span>
+                <span class="dossier-v">Pune, Maharashtra, India</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION // STRICT VERIFIED ARSENAL -->
+    <section id="skills" class="section">
+      <div class="container">
+        
+        <div class="section-header reveal-init">
+          <span class="section-num" style="color: var(--rgb-violet);">02 — TECHNICAL ARSENAL</span>
+          <h2 class="section-title">
+            SKILLS &amp; TECHNOLOGIES
+          </h2>
+          <span class="section-line skills-line"></span>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; font-family: var(--font-mono);">
+            // Strictly technologies actively worked with in development environments.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+
+          <!-- Programming -->
+          <div class="skill-category-card reveal-init">
+            <div class="skill-cat-header">
+              <h3 class="skill-cat-title">
+                <span class="skill-cat-icon">&lt;/&gt;</span> Programming
+              </h3>
+              <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);">LANGS</span>
+            </div>
+            <div class="skill-badge-container">
+              <span class="skill-badge"><span class="skill-badge-dot"></span>C</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>C++</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>Java</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>Python</span>
+            </div>
+          </div>
+
+          <!-- Web -->
+          <div class="skill-category-card reveal-init delay-1">
+            <div class="skill-cat-header">
+              <h3 class="skill-cat-title">
+                <span class="skill-cat-icon">🌐</span> Web
+              </h3>
+              <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);">STACK</span>
+            </div>
+            <div class="skill-badge-container">
+              <span class="skill-badge"><span class="skill-badge-dot"></span>HTML</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>CSS</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>JavaScript</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>PHP</span>
+            </div>
+          </div>
+
+          <!-- Development -->
+          <div class="skill-category-card reveal-init delay-2">
+            <div class="skill-cat-header">
+              <h3 class="skill-cat-title">
+                <span class="skill-cat-icon">📱</span> Development
+              </h3>
+              <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);">SYSTEMS</span>
+            </div>
+            <div class="skill-badge-container">
+              <span class="skill-badge"><span class="skill-badge-dot"></span>Android Studio</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>Android Development</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>API Integration</span>
+            </div>
+          </div>
+
+          <!-- Computer Science -->
+          <div class="skill-category-card reveal-init delay-3">
+            <div class="skill-cat-header">
+              <h3 class="skill-cat-title">
+                <span class="skill-cat-icon">🧠</span> Computer Science
+              </h3>
+              <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);">CORE</span>
+            </div>
+            <div class="skill-badge-container">
+              <span class="skill-badge"><span class="skill-badge-dot"></span>OOP</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>DSA</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>Problem Solving</span>
+            </div>
+          </div>
+
+          <!-- Tools -->
+          <div class="skill-category-card reveal-init delay-4">
+            <div class="skill-cat-header">
+              <h3 class="skill-cat-title">
+                <span class="skill-cat-icon">⚡</span> Tools
+              </h3>
+              <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);">WORKFLOW</span>
+            </div>
+            <div class="skill-badge-container">
+              <span class="skill-badge"><span class="skill-badge-dot"></span>Git</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>GitHub</span>
+              <span class="skill-badge"><span class="skill-badge-dot"></span>Turbo C++</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION // 3 BUILDS -->
+    <section id="projects" class="section">
+      <div class="container">
+        
+        <div class="section-header reveal-init">
+          <span class="section-num" style="color: var(--rgb-cyan);">03 — PROJECTS</span>
+          <h2 class="section-title">
+            FEATURED BUILDS
+          </h2>
+          <span class="section-line projects-line"></span>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; font-family: var(--font-mono);">
+            // Software applications engineered to address real challenges with clean architecture.
+          </p>
+        </div>
+
+        <div class="projects-container">
+
+          <!-- 01: AGRISMART -->
+          <article class="project-card reveal-init">
+            <div class="project-inner-grid">
+              
+              <div class="project-content">
+                <div>
+                  <div class="project-top-meta">
+                    <span class="project-tag-type">Android Application</span>
+                    <span class="project-id-num">// 01</span>
+                  </div>
+
+                  <h3 class="project-title">AgriSmart</h3>
+                  
+                  <p class="project-summary">
+                    An agriculture-oriented mobile application providing practical tools and essential agricultural intelligence for farmers. Built to centralize weather conditions, crop advisory, and market rates into a reliable mobile experience. Developed as diploma project work.
+                  </p>
+
+                  <ul class="project-features-list">
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Weather Information:</strong> Real-time atmospheric metrics and precipitation forecasting</span>
+                    </li>
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Crop Recommendations:</strong> Advisory logic mapping soil conditions and seasonal suitability</span>
+                    </li>
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Agricultural Market Prices:</strong> Mandi and APMC commodity rate monitoring</span>
+                    </li>
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Disease Detection (Concept):</strong> Visual symptom workflow for preliminary crop health</span>
+                    </li>
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Farmer-Oriented Assistance:</strong> Clear, high-contrast interface built for field utility</span>
+                    </li>
+                  </ul>
+
+                  <div class="project-tech-tags">
+                    <span class="p-tech-tag">Java</span>
+                    <span class="p-tech-tag">Android Studio</span>
+                    <span class="p-tech-tag">APIs</span>
+                    <span class="p-tech-tag">OOP</span>
+                  </div>
+                </div>
+
+                <div class="project-bottom-actions">
+                  <button class="btn-rgb-primary" data-inspect-project="agrismart">
+                    <span>Inspect System</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                  </button>
+
+                  <a href="https://github.com/ayush-justdev" target="_blank" rel="noopener noreferrer" class="btn-rgb-secondary">
+                    <span>GitHub</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Phone Simulator -->
+              <div class="project-visual-stage">
+                <div class="phone-mockup">
+                  <div class="phone-notch"></div>
+                  <div class="phone-screen phone-screen-has-img">
+                    <img src="assets/images/agrismart.jpg" alt="AgriSmart Android Application UI" class="phone-screen-img" />
+                    <div class="scan-beam"></div>
+                    <div class="phone-screen-overlay-badge">
+                      <span class="eyebrow-dot"></span> Real App Interface
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- 02: SPOTONJALGAON -->
+          <article class="project-card reveal-init delay-1">
+            <div class="project-inner-grid">
+              
+              <div class="project-content">
+                <div>
+                  <div class="project-top-meta">
+                    <span class="project-tag-type" style="background: rgba(59, 130, 246, 0.12); border-color: rgba(59, 130, 246, 0.3); color: var(--rgb-blue);">
+                      PHP Web Application
+                    </span>
+                    <span class="project-id-num">// 02</span>
+                  </div>
+
+                  <h3 class="project-title">SpotOnJalgaon</h3>
+                  
+                  <p class="project-summary">
+                    A comprehensive venue discovery and booking management web application built for Jalgaon. Engineered with PHP and a relational database as the capstone project during my diploma internship at <strong>Softanic</strong>.
+                  </p>
+
+                  <ul class="project-features-list">
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Venue Discovery:</strong> Search and filter across Turfs, Marriage halls, Libraries, and Gaming zones</span>
+                    </li>
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Booking Requests &amp; Availability:</strong> Time-slot scheduling with real-time availability checks</span>
+                    </li>
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Owner Login &amp; Management:</strong> Venue profile editing, slot controls, and request approvals</span>
+                    </li>
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Admin Dashboard:</strong> Platform moderation, user management, and earnings tracking</span>
+                    </li>
+                  </ul>
+
+                  <div class="project-tech-tags">
+                    <span class="p-tech-tag">PHP</span>
+                    <span class="p-tech-tag">HTML</span>
+                    <span class="p-tech-tag">CSS</span>
+                    <span class="p-tech-tag">JavaScript</span>
+                    <span class="p-tech-tag">Database</span>
+                    <span class="p-tech-tag">Softanic Capstone</span>
+                  </div>
+                </div>
+
+                <div class="project-bottom-actions">
+                  <a href="https://spotonjalgaon.great-site.net/?i=1" target="_blank" rel="noopener noreferrer" class="btn-rgb-primary">
+                    <span>Live Project ↗</span>
+                  </a>
+
+                  <button class="btn-rgb-secondary" data-inspect-project="spotonjalgaon">
+                    <span>Inspect System</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                  </button>
+
+                  <a href="https://github.com/ayush-justdev" target="_blank" rel="noopener noreferrer" class="btn-rgb-secondary">
+                    <span>GitHub</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Browser Simulator -->
+              <div class="project-visual-stage">
+                <div class="browser-mockup">
+                  <div class="browser-bar">
+                    <div class="browser-dots">
+                      <div class="b-dot" style="background: #ef4444;"></div>
+                      <div class="b-dot" style="background: #f59e0b;"></div>
+                      <div class="b-dot" style="background: #10b981;"></div>
+                    </div>
+                    <div class="browser-address">
+                      https://spotonjalgaon.great-site.net/?i=1
+                    </div>
+                    <a href="https://spotonjalgaon.great-site.net/?i=1" target="_blank" rel="noopener noreferrer" class="browser-ext-link" title="Open Live Site">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                  </div>
+                  
+                  <div class="browser-canvas browser-canvas-has-img">
+                    <img src="assets/images/spotonjalgaon.png" alt="SpotOnJalgaon Web Portal UI" class="browser-screen-img" />
+                    <div class="scan-beam"></div>
+                    <div class="browser-screen-overlay-badge">
+                      <span class="eyebrow-dot" style="background: #10b981;"></span> Live Production Platform
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- 03: SMART AGRITECH DASHBOARD -->
+          <article class="project-card reveal-init delay-2">
+            <div class="project-inner-grid">
+              
+              <div class="project-content">
+                <div>
+                  <div class="project-top-meta">
+                    <span class="project-tag-type" style="background: rgba(217, 70, 239, 0.12); border-color: rgba(217, 70, 239, 0.3); color: var(--rgb-magenta);">
+                      Web Application
+                    </span>
+                    <span class="project-id-num">// 03</span>
+                  </div>
+
+                  <h3 class="project-title">Smart AgriTech Dashboard</h3>
+                  
+                  <p class="project-summary">
+                    A comprehensive agronomic web dashboard that aggregates open government data feeds and meteorological APIs to provide actionable farm management intelligence, yield estimation, and operational tools.
+                  </p>
+
+                  <ul class="project-features-list">
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Weather Telemetry Dashboard:</strong> Powered by OpenWeatherMap API with precipitation thresholds</span>
+                    </li>
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Market Information:</strong> Integrated data.gov.in API for regional crop pricing trends</span>
+                    </li>
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Crop Recommendations &amp; Yield Calculator:</strong> Algorithmic estimation for farm output</span>
+                    </li>
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Fertilizer Suggestions &amp; Task Management:</strong> Step-by-step agricultural operations schedule</span>
+                    </li>
+                    <li class="project-feature-item">
+                      <span class="feature-check">✔</span>
+                      <span><strong>Theme Modes:</strong> Dual high-contrast dark and light display modes for daylight field clarity</span>
+                    </li>
+                  </ul>
+
+                  <div class="project-tech-tags">
+                    <span class="p-tech-tag">HTML</span>
+                    <span class="p-tech-tag">CSS</span>
+                    <span class="p-tech-tag">JavaScript</span>
+                    <span class="p-tech-tag">AngularJS</span>
+                    <span class="p-tech-tag">OpenWeatherMap API</span>
+                    <span class="p-tech-tag">data.gov.in API</span>
+                  </div>
+                </div>
+
+                <div class="project-bottom-actions">
+                  <button class="btn-rgb-primary" data-inspect-project="smartagritech">
+                    <span>Inspect System</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                  </button>
+
+                  <a href="https://github.com/ayush-justdev" target="_blank" rel="noopener noreferrer" class="btn-rgb-secondary">
+                    <span>GitHub</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Dashboard Simulator -->
+              <div class="project-visual-stage">
+                <div class="browser-mockup">
+                  <div class="browser-bar">
+                    <div class="browser-dots">
+                      <div class="b-dot" style="background: #ef4444;"></div>
+                      <div class="b-dot" style="background: #f59e0b;"></div>
+                      <div class="b-dot" style="background: #10b981;"></div>
+                    </div>
+                    <div class="browser-address">
+                      https://agritech-dashboard.internal/app/#/telemetry
+                    </div>
+                  </div>
+                  
+                  <div class="browser-canvas">
+                    <div class="scan-beam"></div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <div style="font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: #fff;">
+                        ⚡ AgriTech<span style="color: var(--rgb-magenta);">Telemetry</span>
+                      </div>
+                      <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--rgb-pink);">
+                        [DATA.GOV.IN SYNCED]
+                      </span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem;">
+                      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 0.65rem;">
+                        <div style="font-size: 0.65rem; color: var(--rgb-cyan); font-family: var(--font-mono);">YIELD ESTIMATE</div>
+                        <div style="font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0.2rem 0;">42.5 Qtl / Acre</div>
+                        <div style="font-size: 0.675rem; color: var(--text-secondary);">Soybean • High Confidence</div>
+                      </div>
+
+                      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 0.65rem;">
+                        <div style="font-size: 0.65rem; color: var(--rgb-magenta); font-family: var(--font-mono);">FERTILIZER FORMULA</div>
+                        <div style="font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0.2rem 0;">NPK: 120-60-40</div>
+                        <div style="font-size: 0.675rem; color: var(--text-secondary);">Balanced Soil Nutrients</div>
+                      </div>
+                    </div>
+
+                    <div style="margin-top: auto; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.05); font-family: var(--font-mono); font-size: 0.65rem; color: var(--rgb-magenta); display: flex; align-items: center; gap: 0.4rem;">
+                      <span class="eyebrow-dot"></span> Weather telemetry &amp; task board live.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- JOURNEY SECTION // EDUCATION & ACHIEVEMENTS -->
+    <section id="journey" class="section">
+      <div class="container">
+        
+        <div class="section-header reveal-init">
+          <span class="section-num" style="color: var(--rgb-blue);">04 — ACADEMIC JOURNEY</span>
+          <h2 class="section-title">
+            FORMATION &amp; MILESTONES
+          </h2>
+          <span class="section-line journey-line"></span>
+        </div>
+
+        <div class="timeline-track">
+
+          <!-- Current Degree (PRIMARY IDENTITY) -->
+          <div class="timeline-node highlight-node reveal-init">
+            <div class="edu-card highlight-edu">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="edu-badge-current">CURRENT PURSUIT • PRIMARY IDENTITY</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--rgb-cyan);">
+                  UNDERGRADUATE
+                </span>
+              </div>
+
+              <h3 class="edu-degree" style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; margin: 0.6rem 0 0.25rem 0;">
+                B.Tech in Computer Science &amp; Artificial Intelligence
+              </h3>
+              <div style="color: var(--text-secondary); font-size: 1rem; font-weight: 500; margin-bottom: 0.75rem;">
+                Vishwakarma Institute of Technology (VIT), Pune
+              </div>
+              
+              <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
+                Focused on artificial intelligence principles, algorithmic analysis, systems architecture, object-oriented design, and developing full-stack software applications.
+              </p>
+
+              <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="p-tech-tag">Artificial Intelligence</span>
+                <span class="p-tech-tag">Data Structures &amp; Algorithms</span>
+                <span class="p-tech-tag">Software Engineering</span>
+                <span class="p-tech-tag">Object-Oriented Design</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Foundational Diploma with State Distinction -->
+          <div class="timeline-node reveal-init delay-1">
+            <div class="edu-card">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem;">
+                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">
+                  2023 – 2026
+                </span>
+                <span class="edu-accolade-badge">
+                  ★ 150th Rank across Maharashtra
+                </span>
+              </div>
+
+              <h3 class="edu-degree" style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin: 0.6rem 0 0.25rem 0; color: #fff;">
+                Diploma in CO @ Govt. Polytechnic, Jalgaon
+              </h3>
+              <div style="color: var(--text-secondary); font-size: 1rem; font-weight: 500; margin-bottom: 0.75rem;">
+                Govt. Polytechnic, Jalgaon • <span style="color: var(--rgb-cyan); font-weight: 600;">Aggregate: 83.18%</span>
+              </div>
+              
+              <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
+                Developed strong computational foundations in C, C++, Java, relational database principles, Android Studio, and web development with PHP. Secured the 150th rank in category across all of Maharashtra. Capstone project included the AgriSmart agriculture assistant.
+              </p>
+
+              <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="p-tech-tag">Aggregate: 83.18%</span>
+                <span class="p-tech-tag">150th State Rank</span>
+                <span class="p-tech-tag">C / C++</span>
+                <span class="p-tech-tag">Java</span>
+                <span class="p-tech-tag">Android Studio</span>
+                <span class="p-tech-tag">PHP</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE TERMINAL SHELL -->
+    <section id="terminal" class="section">
+      <div class="container">
+        
+        <div class="section-header reveal-init">
+          <span class="section-num" style="color: var(--rgb-violet);">05 — AYUSH_SHELL v2.1.0</span>
+          <h2 class="section-title">
+            DEVELOPER CONSOLE
+          </h2>
+          <span class="section-line skills-line"></span>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; font-family: var(--font-mono);">
+            // Type commands or click execution chips to query the portfolio state directly.
+          </p>
+        </div>
+
+        <div class="terminal-command-hints reveal-init">
+          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--rgb-cyan);">
+            QUICK EXECUTE:
+          </span>
+          <button class="cmd-hint-btn" data-cmd="about">about</button>
+          <button class="cmd-hint-btn" data-cmd="skills">skills</button>
+          <button class="cmd-hint-btn" data-cmd="projects">projects</button>
+          <button class="cmd-hint-btn" data-cmd="education">education</button>
+          <button class="cmd-hint-btn" data-cmd="status">status</button>
+          <button class="cmd-hint-btn" data-cmd="matrix">matrix</button>
+          <button class="cmd-hint-btn" data-cmd="clear">clear</button>
+        </div>
+
+        <div class="terminal-window reveal-init delay-1">
+          <div class="terminal-titlebar">
+            <div class="term-buttons">
+              <span class="term-btn-dot term-btn-red"></span>
+              <span class="term-btn-dot term-btn-yellow"></span>
+              <span class="term-btn-dot term-btn-green"></span>
+            </div>
+            <span class="terminal-title">ayush@vit-pune:~ (zsh)</span>
+            <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--rgb-cyan);">
+              ● ONLINE
+            </span>
+          </div>
+
+          <div class="terminal-body" id="term-scroll-body">
+            <div id="term-output-area"></div>
+            
+            <div class="term-input-line">
+              <span class="term-prompt">ayush@vit-pune:~$</span>
+              <input type="text" id="term-cmd-input" class="term-input" autocomplete="off" spellcheck="false" placeholder="type 'help' or click buttons above..." aria-label="Terminal command input">
+              <span class="term-cursor"></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION // LET'S BUILD SOMETHING -->
+    <section id="contact" class="section">
+      <div class="container">
+        
+        <div class="section-header reveal-init">
+          <span class="section-num" style="color: var(--rgb-magenta);">06 — TRANSMIT</span>
+          <h2 class="section-title">
+            LET'S BUILD SOMETHING.
+          </h2>
+          <span class="section-line contact-line"></span>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-top: 0.75rem;">
+            Have an idea, project, or opportunity? Let's connect.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          
+          <div class="contact-info-col reveal-init">
+            <div class="contact-card-box">
+              <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.75rem;">
+                Verified Channels
+              </h3>
+              <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7;">
+                Reach out directly via my verified developer networks or send a direct transmission payload.
+              </p>
+
+              <div class="direct-channels">
+                
+                <!-- GitHub -->
+                <a href="https://github.com/ayush-justdev" target="_blank" rel="noopener noreferrer" class="channel-link">
+                  <div class="channel-left">
+                    <span class="channel-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                      </svg>
+                    </span>
+                    <div>
+                      <div class="channel-name">GitHub</div>
+                      <div class="channel-action">github.com/ayush-justdev</div>
+                    </div>
+                  </div>
+                  <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--rgb-cyan);">
+                    VISIT ↗
+                  </span>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/ayush-thakur-vit/" target="_blank" rel="noopener noreferrer" class="channel-link">
+                  <div class="channel-left">
+                    <span class="channel-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.92 0 1.67-.75 1.67-1.67 0-.93-.75-1.68-1.67-1.68-.93 0-1.68.75-1.68 1.68 0 .92.75 1.67 1.68 1.67m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+                      </svg>
+                    </span>
+                    <div>
+                      <div class="channel-name">LinkedIn</div>
+                      <div class="channel-action">linkedin.com/in/ayush-thakur-vit</div>
+                    </div>
+                  </div>
+                  <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--rgb-blue);">
+                    CONNECT ↗
+                  </span>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/ayush._.yoru/" target="_blank" rel="noopener noreferrer" class="channel-link">
+                  <div class="channel-left">
+                    <span class="channel-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                      </svg>
+                    </span>
+                    <div>
+                      <div class="channel-name">Instagram</div>
+                      <div class="channel-action">@ayush._.yoru</div>
+                    </div>
+                  </div>
+                  <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--rgb-magenta);">
+                    FOLLOW ↗
+                  </span>
+                </a>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal-init delay-1">
+            <form id="transmission-form" class="transmission-form">
+              <span style="font-family: var(--font-mono); font-size: 0.725rem; letter-spacing: 0.12em; color: var(--rgb-magenta); text-transform: uppercase;">
+                // TRANSMISSION INTERFACE
+              </span>
+              
+              <div class="form-group">
+                <label for="form-name" class="form-label">Your Name</label>
+                <input type="text" id="form-name" class="form-input" placeholder="e.g. Alex" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-email" class="form-label">Your Email</label>
+                <input type="email" id="form-email" class="form-input" placeholder="alex@domain.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-msg" class="form-label">Message</label>
+                <textarea id="form-msg" class="form-textarea" placeholder="Opportunity, collaboration, or note..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-rgb-primary" style="justify-content: center; width: 100%; margin-top: 0.5rem;">
+                <span>TRANSMIT PACKET</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <div class="footer-brand">
+          AYUSH<span style="color: var(--rgb-magenta);">.</span>DEV
+        </div>
+        <div class="footer-meta" style="margin-top: 0.25rem;">
+          Vishwakarma Institute of Technology (VIT), Pune • B.Tech CS &amp; AI
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem;">
+        <div class="footer-meta">
+          <span style="color: var(--rgb-cyan);">LOC:</span> PUNE, MAHARASHTRA, IN
+        </div>
+        <div class="footer-meta" style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">
+          &copy; 2026 AYUSH THAKUR • BUILT WITH CURIOSITY.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PROJECT DETAIL MODAL DIALOG -->
+  <div id="project-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-container" id="modal-content-area">
+      <!-- Populated dynamically by js/projects.js -->
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/sound.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
