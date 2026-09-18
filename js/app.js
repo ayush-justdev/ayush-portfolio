@@ -6,15 +6,136 @@
 (function () {
   'use strict';
 
-  // --- Header Scroll Effect ---
+  // --- Theme Manager (Advanced Light & Dark Mode) ---
+  const ThemeManager = (function () {
+    const STORAGE_KEY = 'ayush_portfolio_theme';
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+
+    function getPreferredTheme() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved === 'light' || saved === 'dark') {
+        return saved;
+      }
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function applyTheme(theme, playAudio = false) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem(STORAGE_KEY, theme);
+
+      // Update button text and labels
+      const statusTexts = document.querySelectorAll('.theme-status-text');
+      statusTexts.forEach((el) => {
+        el.textContent = theme === 'light' ? 'LIGHT' : 'DARK';
+      });
+
+      const buttons = [themeToggleBtn, mobileThemeToggleBtn].filter(Boolean);
+      buttons.forEach((btn) => {
+        btn.setAttribute('title', `Active: ${theme.toUpperCase()} Mode. Click to switch.`);
+        btn.setAttribute('aria-label', `Active: ${theme.toUpperCase()} Mode. Click to switch.`);
+      });
+
+      if (playAudio && window.SoundEngine) {
+        window.SoundEngine.action();
+      }
+
+      // Broadcast custom event for background canvas & other subsystems
+      window.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const target = current === 'dark' ? 'light' : 'dark';
+      applyTheme(target, true);
+      window.showToast(`Switched to ${target.toUpperCase()} MODE`);
+    }
+
+    function init() {
+      const initial = getPreferredTheme();
+      applyTheme(initial, false);
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+      }
+      if (mobileThemeToggleBtn) {
+        mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+      }
+
+      // System theme change listener (if user hasn't explicitly set preference)
+      window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+        if (!localStorage.getItem(STORAGE_KEY)) {
+          applyTheme(e.matches ? 'light' : 'dark', false);
+        }
+      });
+    }
+
+    return {
+      init: init,
+      toggle: toggleTheme,
+      set: function (mode) {
+        if (mode === 'light' || mode === 'dark') {
+          applyTheme(mode, true);
+        }
+      },
+      get: function () {
+        return document.documentElement.getAttribute('data-theme') || 'dark';
+      }
+    };
+  })();
+
+  window.ThemeManager = ThemeManager;
+  ThemeManager.init();
+
+  // --- Header Scroll Effect & Scroll Indicator Auto-Fade ---
   const header = document.querySelector('.site-header');
+  const heroScrollIndicator = document.querySelector('.hero-scroll-indicator');
+
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
+    const scrollY = window.scrollY;
+    if (scrollY > 40) {
       header?.classList.add('scrolled');
     } else {
       header?.classList.remove('scrolled');
     }
-  });
+
+    if (heroScrollIndicator) {
+      if (scrollY > 70) {
+        heroScrollIndicator.style.opacity = '0';
+        heroScrollIndicator.style.pointerEvents = 'none';
+      } else {
+        heroScrollIndicator.style.opacity = '1';
+        heroScrollIndicator.style.pointerEvents = 'auto';
+      }
+    }
+  }, { passive: true });
+
+  // --- Active Navigation Link Scroll Spy ---
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links .nav-link');
+
+  function updateActiveNavLink() {
+    const scrollPosition = window.scrollY + 140;
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute('id');
+
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        navLinks.forEach((link) => {
+          if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNavLink, { passive: true });
+  updateActiveNavLink();
 
   // --- Mobile Menu Toggle ---
   const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -34,8 +155,12 @@
   }
 
   // --- Scroll Reveal Animations ---
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealElements = document.querySelectorAll('.reveal-init');
-  if ('IntersectionObserver' in window) {
+
+  if (prefersReducedMotion) {
+    revealElements.forEach((el) => el.classList.add('reveal-visible'));
+  } else if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -46,7 +171,7 @@
         });
       },
       {
-        threshold: 0.1,
+        threshold: 0.08,
         rootMargin: '0px 0px -40px 0px'
       }
     );

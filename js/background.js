@@ -21,17 +21,42 @@
   let mouse = { x: null, y: null, radius: 160 };
   let animationFrameId;
   let isTabActive = true;
+  let isLightMode = document.documentElement.getAttribute('data-theme') === 'light';
 
   const config = {
     particleCount: window.innerWidth < 768 ? 26 : 52,
     maxDistance: 115,
     mouseConnectDist: 145,
-    baseColor: '0, 229, 255',
-    violetColor: '139, 92, 246',
-    magentaColor: '217, 70, 239',
+    baseColor: isLightMode ? '2, 132, 199' : '0, 229, 255',
+    violetColor: isLightMode ? '124, 58, 237' : '139, 92, 246',
+    magentaColor: isLightMode ? '219, 39, 119' : '217, 70, 239',
     nodeSpeed: 0.22,
     gridStep: 110
   };
+
+  function updateThemePalette() {
+    isLightMode = document.documentElement.getAttribute('data-theme') === 'light';
+    if (isLightMode) {
+      config.baseColor = '2, 132, 199';      // Sky Azure
+      config.violetColor = '124, 58, 237';   // Royal Violet
+      config.magentaColor = '219, 39, 119';  // Fuchsia Pink
+    } else {
+      config.baseColor = '0, 229, 255';      // Neon Cyan
+      config.violetColor = '139, 92, 246';   // Neon Violet
+      config.magentaColor = '217, 70, 239';  // Neon Magenta
+    }
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      if (p.colorType === 'violet') p.color = config.violetColor;
+      else if (p.colorType === 'base') p.color = config.baseColor;
+      else p.color = config.magentaColor;
+    }
+  }
+
+  window.addEventListener('themechange', () => {
+    updateThemePalette();
+  });
 
   class Particle {
     constructor() {
@@ -45,10 +70,13 @@
 
       const rand = Math.random();
       if (rand > 0.7) {
+        this.colorType = 'violet';
         this.color = config.violetColor;
       } else if (rand > 0.45) {
+        this.colorType = 'base';
         this.color = config.baseColor;
       } else {
+        this.colorType = 'magenta';
         this.color = config.magentaColor;
       }
       this.baseAlpha = Math.random() * 0.3 + 0.2;
@@ -261,7 +289,7 @@
     const spotlightRadius = 240;
 
     // Background base subtle lines
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.012)';
+    ctx.strokeStyle = isLightMode ? 'rgba(15, 23, 42, 0.038)' : 'rgba(255, 255, 255, 0.012)';
     ctx.lineWidth = 1;
 
     for (let x = 0; x < width; x += step) {
@@ -293,7 +321,7 @@
             const alpha = intensity * 0.35;
 
             // Draw micro crosshair (+) at grid intersection
-            ctx.strokeStyle = `rgba(${config.baseColor}, ${alpha})`;
+            ctx.strokeStyle = `rgba(${config.baseColor}, ${alpha * (isLightMode ? 0.75 : 1)})`;
             ctx.lineWidth = 1;
             const arm = 4;
             ctx.beginPath();
@@ -304,7 +332,7 @@
             ctx.stroke();
 
             // Tiny center core dot
-            ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.8})`;
+            ctx.fillStyle = isLightMode ? `rgba(15, 23, 42, ${alpha * 0.7})` : `rgba(255, 255, 255, ${alpha * 0.8})`;
             ctx.fillRect(gx - 0.5, gy - 0.5, 1, 1);
           }
         }

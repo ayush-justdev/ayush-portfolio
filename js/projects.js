@@ -18,8 +18,16 @@ const ProjectsManager = (function () {
       stack: ['Java', 'Android Studio', 'APIs', 'OOP', 'Mobile Development'],
       badge: 'Diploma Project',
       origin: 'Developed as part of diploma engineering project work (Diploma in CO @ Govt. Polytechnic, Jalgaon).',
-      imageUrl: 'assets/images/agrismart.jpg',
+      imageUrl: 'assets/images/agrismart_dashboard.jpg',
       imageClass: 'portrait',
+      screenshots: [
+        { url: 'assets/images/agrismart_dashboard.jpg', label: '01 // Dashboard & Advisory (Dark)', tab: 'Dark UI' },
+        { url: 'assets/images/agrismart_light.jpg', label: '02 // Dashboard & Advisory (Light)', tab: 'Light UI' },
+        { url: 'assets/images/agrismart_dark.jpg', label: '03 // Agro-Telemetry & Advisory', tab: 'Telemetry' },
+        { url: 'assets/images/agrismart_crop_recommend.jpg', label: '04 // Crop Prediction Engine', tab: 'Crop Predict' },
+        { url: 'assets/images/agrismart_diagnosis.jpg', label: '05 // Vision AI Disease Scanner', tab: 'Diagnosis' },
+        { url: 'assets/images/agrismart_farming_tips.jpg', label: '06 // Agronomic Best Practices', tab: 'Farming Tips' }
+      ],
       overview:
         'AgriSmart is an agriculture-oriented mobile application built to provide farmers with practical tools, live agro-climatic intelligence, and vital market data directly on Android devices, designed for resilience and intuitive field usage.',
       modules: [
@@ -61,8 +69,14 @@ const ProjectsManager = (function () {
       stack: ['PHP', 'HTML', 'CSS', 'JavaScript', 'Database', 'Web Architecture'],
       badge: 'Softanic Internship Capstone',
       origin: 'Capstone and final project engineered during diploma internship at Softanic (Diploma in CO @ Govt. Polytechnic, Jalgaon).',
-      imageUrl: 'assets/images/spotonjalgaon.png',
+      imageUrl: 'assets/images/spoton_hero.png',
       liveUrl: 'https://spotonjalgaon.great-site.net/?i=1',
+      screenshots: [
+        { url: 'assets/images/spoton_hero.png', label: '01 // Hero & Discovery Interface', tab: 'Hero / Search' },
+        { url: 'assets/images/spoton_library_search.png', label: '02 // Library & Category Filters', tab: 'Study Libraries' },
+        { url: 'assets/images/spoton_grid.png', label: '03 // Venue Catalog Grid', tab: 'Catalog Grid' },
+        { url: 'assets/images/spoton_listing.png', label: '04 // Listing & Booking Details', tab: 'Detail / Booking' }
+      ],
       overview:
         'SpotOnJalgaon is a full-featured venue discovery and booking management web application built for Jalgaon city. It connects citizens with local facilities while providing venue owners and administrators with end-to-end management tools.',
       modules: [
@@ -100,6 +114,11 @@ const ProjectsManager = (function () {
       stack: ['HTML', 'CSS', 'JavaScript', 'AngularJS', 'OpenWeatherMap API', 'data.gov.in API'],
       badge: 'Agronomic Web Suite',
       origin: 'Built to empower agricultural stakeholders with open government data and real-time weather APIs.',
+      screenshots: [
+        { label: '01 // Live API Ingestion & Telemetry Stream', tab: 'API Stream' },
+        { label: '02 // Algorithmic Yield & Soil Chemistry Model', tab: 'Algorithm Core' },
+        { label: '03 // End-to-End System Pipeline Topology', tab: 'Architecture' }
+      ],
       overview:
         'A comprehensive agronomic web dashboard that aggregates open government data feeds and meteorological APIs to provide actionable farm management intelligence, yield estimation, and advisory tools.',
       modules: [
@@ -294,6 +313,365 @@ const ProjectsManager = (function () {
   };
 })();
 
+/**
+ * Project Showcase Controller & Isolated 3D Screenshot Carousel Engine
+ * 1. Outer Navigation: Switch between projects (01 AgriSmart, 02 SpotOnJalgaon, 03 Smart AgriTech)
+ * 2. Inner 3D Carousel: Manages floating screenshot stack (prev/active/next) strictly confined to right column
+ */
+const ProjectShowcaseController = (function () {
+  'use strict';
+
+  let currentProjectIndex = 0;
+  const screenshotCarousels = [];
+
+  const PROJECT_TITLES = [
+    { title: 'AGRISMART', color: 'var(--rgb-cyan)' },
+    { title: 'SPOTONJALGAON', color: '#10b981' },
+    { title: 'SMART AGRITECH', color: 'var(--rgb-magenta)' }
+  ];
+
+  /**
+   * Class managing an isolated 3D screenshot carousel for a single project
+   */
+  class ScreenshotCarousel {
+    constructor(container) {
+      this.container = container;
+      this.stage = container.querySelector('.screenshot-carousel-stage');
+      this.cards = Array.from(container.querySelectorAll('.shot-3d-card'));
+      this.tabs = Array.from(container.querySelectorAll('.shot-tab-btn'));
+      this.prevBtn = container.querySelector('.shot-step-prev');
+      this.nextBtn = container.querySelector('.shot-step-next');
+      this.labelEl = container.querySelector('.screenshot-label-text');
+      this.currentIndex = 0;
+      this.totalCards = this.cards.length;
+      this.cleanupTimer = null;
+      this.isDragging = false;
+      this.startX = 0;
+      this.currentX = 0;
+
+      if (!this.stage || this.totalCards === 0) return;
+
+      this.bindEvents();
+      this.updateState();
+    }
+
+    updateState(direction = 'next', outgoingIndex = -1) {
+      if (this.cleanupTimer) {
+        clearTimeout(this.cleanupTimer);
+      }
+
+      const total = this.totalCards;
+
+      this.cards.forEach((card, idx) => {
+        card.classList.remove(
+          'active',
+          'prev',
+          'next',
+          'hidden',
+          'shot-in-from-right',
+          'shot-in-from-left',
+          'shot-out-to-left',
+          'shot-out-to-right'
+        );
+
+        const offset = (idx - this.currentIndex + total) % total;
+
+        if (offset === 0) {
+          card.classList.add('active');
+          if (direction === 'next' && outgoingIndex !== -1 && outgoingIndex !== this.currentIndex) {
+            card.classList.add('shot-in-from-right');
+          } else if (direction === 'prev' && outgoingIndex !== -1 && outgoingIndex !== this.currentIndex) {
+            card.classList.add('shot-in-from-left');
+          }
+        } else if (offset === 1) {
+          card.classList.add('next');
+          if (direction === 'prev' && idx === outgoingIndex) {
+            card.classList.add('shot-out-to-right');
+          }
+        } else if (offset === total - 1) {
+          card.classList.add('prev');
+          if (direction === 'next' && idx === outgoingIndex) {
+            card.classList.add('shot-out-to-left');
+          }
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Cleanup directional animation classes after spring completes
+      this.cleanupTimer = setTimeout(() => {
+        this.cards.forEach((card) => {
+          card.classList.remove(
+            'shot-in-from-right',
+            'shot-in-from-left',
+            'shot-out-to-left',
+            'shot-out-to-right'
+          );
+        });
+      }, 550);
+
+      // Update Active View Label
+      const activeCard = this.cards[this.currentIndex];
+      if (activeCard && this.labelEl) {
+        const label = activeCard.getAttribute('data-label');
+        if (label) {
+          this.labelEl.innerHTML = label;
+        }
+      }
+
+      // Update Tabs Strip
+      this.tabs.forEach((tab, idx) => {
+        if (idx === this.currentIndex) {
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+        } else {
+          tab.classList.remove('active');
+          tab.setAttribute('aria-selected', 'false');
+        }
+      });
+    }
+
+    goTo(targetIndex, direction = 'next') {
+      if (this.totalCards <= 1) return;
+
+      if (targetIndex >= this.totalCards) targetIndex = 0;
+      if (targetIndex < 0) targetIndex = this.totalCards - 1;
+      if (targetIndex === this.currentIndex) return;
+
+      const outgoing = this.currentIndex;
+      this.currentIndex = targetIndex;
+
+      this.updateState(direction, outgoing);
+
+      if (window.SoundEngine) {
+        window.SoundEngine.click();
+      }
+    }
+
+    bindEvents() {
+      // Step Buttons
+      if (this.prevBtn) {
+        this.prevBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.goTo(this.currentIndex - 1, 'prev');
+        });
+      }
+
+      if (this.nextBtn) {
+        this.nextBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.goTo(this.currentIndex + 1, 'next');
+        });
+      }
+
+      // Tab Buttons
+      this.tabs.forEach((tab, index) => {
+        tab.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (index !== this.currentIndex) {
+            this.goTo(index, index > this.currentIndex ? 'next' : 'prev');
+          }
+        });
+      });
+
+      // Direct Clicking on 3D Floating Cards (Prev / Next)
+      this.cards.forEach((card) => {
+        card.addEventListener('click', (e) => {
+          // If clicking an external link inside the browser mockup bar, let it work
+          if (e.target.closest('a, button, input')) return;
+
+          if (card.classList.contains('next')) {
+            e.preventDefault();
+            this.goTo(this.currentIndex + 1, 'next');
+          } else if (card.classList.contains('prev')) {
+            e.preventDefault();
+            this.goTo(this.currentIndex - 1, 'prev');
+          } else if (card.classList.contains('active')) {
+            // Clicking active mockup advances to next view
+            this.goTo(this.currentIndex + 1, 'next');
+          }
+        });
+      });
+
+      // Pointer & Touch Swipe on Stage
+      this.initSwipe();
+    }
+
+    initSwipe() {
+      const stage = this.stage;
+      if (!stage) return;
+
+      const onStart = (e) => {
+        this.isDragging = true;
+        this.startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        this.currentX = this.startX;
+      };
+
+      const onMove = (e) => {
+        if (!this.isDragging) return;
+        this.currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+      };
+
+      const onEnd = () => {
+        if (!this.isDragging) return;
+        this.isDragging = false;
+        const deltaX = this.currentX - this.startX;
+        const threshold = 40;
+
+        if (deltaX < -threshold) {
+          this.goTo(this.currentIndex + 1, 'next');
+        } else if (deltaX > threshold) {
+          this.goTo(this.currentIndex - 1, 'prev');
+        }
+      };
+
+      stage.addEventListener('mousedown', onStart);
+      stage.addEventListener('touchstart', onStart, { passive: true });
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('touchmove', onMove, { passive: true });
+      window.addEventListener('mouseup', onEnd);
+      window.addEventListener('touchend', onEnd);
+    }
+  }
+
+  /**
+   * Switch active project card (01 AgriSmart, 02 SpotOnJalgaon, 03 Smart AgriTech)
+   */
+  function switchProject(targetIndex) {
+    const cards = document.querySelectorAll('.project-showcase-card');
+    const totalProjects = cards.length;
+    if (totalProjects === 0) return;
+
+    if (targetIndex >= totalProjects) targetIndex = 0;
+    if (targetIndex < 0) targetIndex = totalProjects - 1;
+    if (targetIndex === currentProjectIndex && cards[targetIndex].classList.contains('active')) return;
+
+    currentProjectIndex = targetIndex;
+
+    // Update Project Cards Display
+    cards.forEach((card, idx) => {
+      if (idx === currentProjectIndex) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+
+    // Update HUD Counter
+    const counterEl = document.getElementById('project-current-num');
+    if (counterEl) {
+      counterEl.textContent = `0${currentProjectIndex + 1}`;
+    }
+
+    // Update Project Indicator Title & Dot
+    const titleEl = document.getElementById('project-active-title');
+    const dotEl = document.getElementById('project-indicator-dot');
+    const meta = PROJECT_TITLES[currentProjectIndex] || PROJECT_TITLES[0];
+
+    if (titleEl) {
+      titleEl.textContent = meta.title;
+    }
+    if (dotEl) {
+      dotEl.style.background = meta.color;
+    }
+
+    // Update Bottom Thumbnail Pills
+    const thumbPills = document.querySelectorAll('.project-thumb-pill');
+    thumbPills.forEach((pill, idx) => {
+      if (idx === currentProjectIndex) {
+        pill.classList.add('active');
+        pill.setAttribute('aria-selected', 'true');
+      } else {
+        pill.classList.remove('active');
+        pill.setAttribute('aria-selected', 'false');
+      }
+    });
+
+    if (window.SoundEngine) {
+      window.SoundEngine.click();
+    }
+  }
+
+  function init() {
+    // 1. Initialize Inner Screenshot Carousels for each project
+    const cards = document.querySelectorAll('.project-showcase-card');
+    cards.forEach((card) => {
+      screenshotCarousels.push(new ScreenshotCarousel(card));
+    });
+
+    // 2. Bind Outer Project Switcher Navigation Buttons
+    const prevBtn = document.getElementById('project-prev-btn');
+    const nextBtn = document.getElementById('project-next-btn');
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchProject(currentProjectIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchProject(currentProjectIndex + 1);
+      });
+    }
+
+    // 3. Bind Bottom Quick Switcher Pills
+    const thumbPills = document.querySelectorAll('.project-thumb-pill');
+    thumbPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const target = parseInt(pill.getAttribute('data-project-target'), 10);
+        if (!isNaN(target)) {
+          switchProject(target);
+        }
+      });
+    });
+
+    // 4. Keyboard Arrow Navigation (when in projects section viewport)
+    window.addEventListener('keydown', (e) => {
+      const carouselEl = document.getElementById('projects');
+      if (!carouselEl) return;
+      const rect = carouselEl.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+
+      if (inView && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        if (e.key === 'ArrowRight') {
+          if (e.shiftKey) {
+            switchProject(currentProjectIndex + 1);
+          } else {
+            const activeCarousel = screenshotCarousels[currentProjectIndex];
+            if (activeCarousel) {
+              activeCarousel.goTo(activeCarousel.currentIndex + 1, 'next');
+            }
+          }
+        } else if (e.key === 'ArrowLeft') {
+          if (e.shiftKey) {
+            switchProject(currentProjectIndex - 1);
+          } else {
+            const activeCarousel = screenshotCarousels[currentProjectIndex];
+            if (activeCarousel) {
+              activeCarousel.goTo(activeCarousel.currentIndex - 1, 'prev');
+            }
+          }
+        }
+      }
+    });
+  }
+
+  return {
+    init: init,
+    switchProject: switchProject,
+    getCarousels: () => screenshotCarousels
+  };
+})();
+
+// Provide BBCarousel alias for backward compatibility
+const BBCarousel = ProjectShowcaseController;
+window.ProjectShowcaseController = ProjectShowcaseController;
+window.BBCarousel = BBCarousel;
+
 document.addEventListener('DOMContentLoaded', () => {
   ProjectsManager.init();
+  ProjectShowcaseController.init();
 });

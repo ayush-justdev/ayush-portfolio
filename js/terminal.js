@@ -20,12 +20,13 @@ AVAILABLE COMMANDS // AYUSH_SHELL v2.1.0:
   • about       : Display developer identity & background
   • skills      : List verified technical competencies
   • projects    : Review featured builds (AgriSmart, SpotOnJalgaon, Smart AgriTech)
-  • education   : View academic achievements (VIT Pune, GP Jalgaon 83.18%, 150th rank)
+  • education   : View academic achievements (VIT Pune, GP Jalgaon 83.18%, 150th Rank in Category — Maharashtra)
   • contact     : Transmit verified social channels (GitHub, LinkedIn, Instagram)
   • status      : Current system coordinates & operational telemetry
   • matrix      : Execute cyber visual stream
   • clear       : Clear terminal window
   • date        : Print current timestamp & local time
+  • theme       : Switch interface mode ('theme light', 'theme dark', 'theme toggle')
 `,
 
     about: `
@@ -71,7 +72,7 @@ ACADEMIC TRAJECTORY:
   • Qualification: Diploma in CO @ Govt. Polytechnic, Jalgaon (2023–2026)
   • Institute   : Govt. Polytechnic, Jalgaon
   • Aggregate   : 83.18%
-  • Distinction : 150th rank in category across Maharashtra
+  • Distinction : 150th Rank in Category — Maharashtra
 `,
 
     contact: `
@@ -121,6 +122,26 @@ SYSTEM TELEMETRY:
 
     if (cleanCmd === 'matrix') {
       runMatrixEffect();
+      return;
+    }
+
+    if (cleanCmd.startsWith('theme')) {
+      const parts = cleanCmd.split(/\s+/);
+      const sub = parts[1];
+      if (window.ThemeManager) {
+        if (sub === 'light') {
+          window.ThemeManager.set('light');
+          printOutput(`[SYSTEM]: Interface switched to LIGHT MODE.`);
+        } else if (sub === 'dark') {
+          window.ThemeManager.set('dark');
+          printOutput(`[SYSTEM]: Interface switched to DARK MODE.`);
+        } else {
+          window.ThemeManager.toggle();
+          printOutput(`[SYSTEM]: Interface toggled to ${window.ThemeManager.get().toUpperCase()} MODE.`);
+        }
+      } else {
+        printOutput(`[SYSTEM]: ThemeManager unavailable.`);
+      }
       return;
     }
 

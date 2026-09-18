@@ -1,55 +1,59 @@
 /* ==========================================================================
    AYUSH THAKUR // PERSONAL DEVELOPER PORTFOLIO
-   Aesthetic: Dark Futuristic Developer × Japanese Minimalism × Subtle Anime Atmosphere
-   Refined RGB Light System: Subdued, Sophisticated & Balanced
+   Design System: Dark Futuristic Luxury × Modern Japanese Tech // BB Edition
+   Luxury RGB Edge Lighting & Architectural Restraint
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-:root {
-  /* Surfaces - Obsidian Black & Deep Charcoal */
-  --bg-primary: #050507;
-  --bg-secondary: #08080d;
+:root,
+[data-theme="dark"] {
+  /* Surfaces - Obsidian Black & Deep Architectural Charcoal */
+  --bg-primary: #040406;
+  --bg-secondary: #07070b;
   --bg-tertiary: #0c0c14;
-  --bg-card: rgba(11, 11, 18, 0.72);
-  --bg-card-hover: rgba(16, 16, 26, 0.88);
+  --bg-card: rgba(10, 10, 16, 0.74);
+  --bg-card-hover: rgba(15, 15, 25, 0.92);
+  --bg-surface-elevated: #0f0f18;
   
-  /* Restrained RGB Accent Palette */
-  --rgb-cyan: #00e5ff;
+  /* Restrained Luxury RGB Accent Palette */
+  --rgb-cyan: #00f0ff;
   --rgb-blue: #3b82f6;
   --rgb-violet: #8b5cf6;
   --rgb-magenta: #d946ef;
   --rgb-pink: #ec4899;
 
-  /* Subtle Soft Glows */
-  --glow-cyan: rgba(0, 229, 255, 0.14);
+  /* Subtle Atmospheric Edge Glows */
+  --glow-cyan: rgba(0, 240, 255, 0.16);
   --glow-blue: rgba(59, 130, 246, 0.14);
-  --glow-violet: rgba(139, 92, 246, 0.14);
+  --glow-violet: rgba(139, 92, 246, 0.16);
   --glow-magenta: rgba(217, 70, 239, 0.14);
   --glow-pink: rgba(236, 72, 153, 0.14);
 
   /* Gradients */
-  --gradient-rgb: linear-gradient(135deg, #00e5ff 0%, #3b82f6 25%, #8b5cf6 50%, #d946ef 75%, #ec4899 100%);
-  --gradient-rgb-h: linear-gradient(90deg, #00e5ff 0%, #3b82f6 25%, #8b5cf6 50%, #d946ef 75%, #ec4899 100%);
+  --gradient-rgb: linear-gradient(135deg, #00f0ff 0%, #3b82f6 25%, #8b5cf6 50%, #d946ef 75%, #ec4899 100%);
+  --gradient-rgb-h: linear-gradient(90deg, #00f0ff 0%, #3b82f6 25%, #8b5cf6 50%, #d946ef 75%, #ec4899 100%);
   --gradient-blue-violet: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   --gradient-violet-pink: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
-  --gradient-cyan-blue: linear-gradient(135deg, #00e5ff 0%, #3b82f6 100%);
+  --gradient-cyan-blue: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
   --gradient-magenta-pink: linear-gradient(135deg, #d946ef 0%, #ec4899 100%);
 
   /* Typography Colors */
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.68);
-  --text-muted: rgba(255, 255, 255, 0.42);
+  --text-secondary: rgba(255, 255, 255, 0.70);
+  --text-muted: rgba(255, 255, 255, 0.44);
   
-  /* Borders */
+  /* Hairline Outlines & Edge Borders */
   --border-subtle: rgba(255, 255, 255, 0.07);
-  --border-active: rgba(255, 255, 255, 0.18);
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(255, 255, 255, 0.22);
+  --border-glow: rgba(0, 240, 255, 0.35);
 
-  /* Modern Sharp Typography */
-  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-heading: 'Outfit', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  /* Premium Typography Combination */
+  --font-display: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Space Grotesk', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
   /* Transitions & Layout */
   --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
@@ -58,9 +62,49 @@
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
-  --radius-xl: 22px;
-  --container-max: 1220px;
-  --nav-height: 70px;
+  --radius-xl: 24px;
+  --container-max: 1260px;
+  --nav-height: 72px;
+}
+
+[data-theme="light"] {
+  /* Surfaces - Minimalist Japanese Architectural Paper & Frosted Alabaster */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  
+  /* Saturated, High-Legibility RGB Accents */
+  --rgb-cyan: #0284c7;     /* Sky 600 - crisp azure */
+  --rgb-blue: #2563eb;     /* Blue 600 */
+  --rgb-violet: #7c3aed;   /* Violet 600 */
+  --rgb-magenta: #c026d3;  /* Fuchsia 600 */
+  --rgb-pink: #db2777;     /* Pink 600 */
+
+  /* Light Glows */
+  --glow-cyan: rgba(2, 132, 199, 0.15);
+  --glow-blue: rgba(37, 99, 235, 0.15);
+  --glow-violet: rgba(124, 58, 237, 0.15);
+  --glow-magenta: rgba(192, 38, 211, 0.15);
+  --glow-pink: rgba(219, 39, 119, 0.15);
+
+  /* Gradients */
+  --gradient-rgb: linear-gradient(135deg, #0284c7 0%, #2563eb 25%, #7c3aed 50%, #c026d3 75%, #db2777 100%);
+  --gradient-rgb-h: linear-gradient(90deg, #0284c7 0%, #2563eb 25%, #7c3aed 50%, #c026d3 75%, #db2777 100%);
+  --gradient-blue-violet: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --gradient-violet-pink: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+  --gradient-cyan-blue: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  --gradient-magenta-pink: linear-gradient(135deg, #c026d3 0%, #db2777 100%);
+
+  /* Typography Colors - High-Contrast Razor Sharp Slate */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  
+  /* Borders & Shadows */
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-active: rgba(15, 23, 42, 0.22);
 }
 
 /* Reset */
@@ -243,6 +287,67 @@ body {
   .rgb-cursor {
     display: none !important;
   }
+}
+
+/* --- THEME TRANSITION SYSTEM --- */
+html, body, .site-header, .project-card, .edu-card, .dossier-card, .skill-group-card, .contact-card, .transmission-form, .terminal-window, .modal-container, .phone-mockup, .browser-mockup, .hud-btn, .btn-rgb-secondary {
+  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Light Theme Overrides for Global Ambience */
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+[data-theme="light"] body {
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(2, 132, 199, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 45%, rgba(124, 58, 237, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 75% 55% at 15% 85%, rgba(219, 39, 119, 0.05) 0%, transparent 60%);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(2, 132, 199, 0.25);
+  color: #0f172a;
+}
+
+[data-theme="light"] .rgb-blob {
+  opacity: 0.08;
+  filter: blur(160px);
+}
+
+[data-theme="light"] .blob-1 {
+  background: radial-gradient(circle, #38bdf8 0%, #818cf8 100%);
+}
+
+[data-theme="light"] .blob-2 {
+  background: radial-gradient(circle, #c084fc 0%, #f472b6 100%);
+}
+
+[data-theme="light"] .blob-3 {
+  background: radial-gradient(circle, #f472b6 0%, #fb7185 100%);
+}
+
+[data-theme="light"] .cyber-grid-overlay {
+  background-image: radial-gradient(circle at 1px 1px, rgba(2, 132, 199, 0.12) 1px, transparent 0);
+  opacity: 0.6;
+}
+
+[data-theme="light"] .scanline-overlay {
+  opacity: 0.012;
+}
+
+[data-theme="light"] .noise-overlay {
+  opacity: 0.012;
+}
+
+[data-theme="light"] .rgb-cursor {
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.08) 0%, rgba(124, 58, 237, 0.04) 45%, transparent 75%);
 }
 
 /* Typography Utilities */
