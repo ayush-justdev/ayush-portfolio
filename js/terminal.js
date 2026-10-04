@@ -19,7 +19,7 @@
 AVAILABLE COMMANDS // AYUSH_SHELL v2.1.0:
   • about       : Display developer identity & background
   • skills      : List verified technical competencies
-  • projects    : Review featured builds (AgriSmart, SpotOnJalgaon, Smart AgriTech)
+  • projects    : Review featured builds (AgriSmart, SpotOnJalgaon)
   • education   : View academic achievements (VIT Pune, GP Jalgaon 83.18%, 150th Rank in Category — Maharashtra)
   • contact     : Transmit verified social channels (GitHub, LinkedIn, Instagram)
   • status      : Current system coordinates & operational telemetry
@@ -56,10 +56,6 @@ FEATURED BUILDS:
       - Stack: PHP, HTML, CSS, JavaScript, Database
       - Purpose: Hyperlocal venue discovery & booking platform (Turfs, Marriage halls, Libraries, Gaming zones). Capstone at Softanic.
       - Live Project: https://spotonjalgaon.great-site.net/?i=1
-
-  03. Smart AgriTech Dashboard [Web Application]
-      - Stack: HTML, CSS, JavaScript, AngularJS, OpenWeatherMap & data.gov.in APIs
-      - Purpose: Agronomic telemetry, yield prediction, fertilizer calculation & task management.
 `,
 
     education: `

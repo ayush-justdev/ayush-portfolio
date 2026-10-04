@@ -3,7 +3,6 @@
  * Detailed technical breakdown for:
  * 01 - AgriSmart (Android / Java)
  * 02 - SpotOnJalgaon (PHP / Softanic Internship Capstone)
- * 03 - Smart AgriTech Dashboard (HTML / CSS / JS / AngularJS / APIs)
  */
 
 const ProjectsManager = (function () {
@@ -104,52 +103,6 @@ const ProjectsManager = (function () {
       ],
       githubUrl: 'https://github.com/ayush-justdev',
       status: 'Internship Capstone // Softanic'
-    },
-
-    smartagritech: {
-      id: '03',
-      title: 'Smart AgriTech Dashboard',
-      subtitle: 'Real-Time Agronomic Telemetry, Yield Prediction & Farm Operations Suite',
-      type: 'Web Application',
-      stack: ['HTML', 'CSS', 'JavaScript', 'AngularJS', 'OpenWeatherMap API', 'data.gov.in API'],
-      badge: 'Agronomic Web Suite',
-      origin: 'Built to empower agricultural stakeholders with open government data and real-time weather APIs.',
-      screenshots: [
-        { label: '01 // Live API Ingestion & Telemetry Stream', tab: 'API Stream' },
-        { label: '02 // Algorithmic Yield & Soil Chemistry Model', tab: 'Algorithm Core' },
-        { label: '03 // End-to-End System Pipeline Topology', tab: 'Architecture' }
-      ],
-      overview:
-        'A comprehensive agronomic web dashboard that aggregates open government data feeds and meteorological APIs to provide actionable farm management intelligence, yield estimation, and advisory tools.',
-      modules: [
-        {
-          title: 'Live Weather Telemetry Dashboard',
-          desc: 'Pulls dynamic metrics via OpenWeatherMap API, detailing rainfall probability, solar radiation, humidity, and wind velocity.'
-        },
-        {
-          title: 'Open Data Market Integration',
-          desc: 'Interfaces with data.gov.in APIs to fetch verified regional commodity rates and historical market price fluctuations.'
-        },
-        {
-          title: 'Crop Advisory & Yield Calculator',
-          desc: 'Algorithmic calculations estimating expected crop yield based on farm acreage, soil classification, and seasonal inputs.'
-        },
-        {
-          title: 'Fertilizer Calculation & Task Manager',
-          desc: 'Chemical and organic fertilizer requirement estimator coupled with an interactive task management board for farming cycles.'
-        },
-        {
-          title: 'Adaptive Interface Mode',
-          desc: 'Supports high-contrast dark and light display modes optimized for indoor study and direct outdoor sunlight readability.'
-        }
-      ],
-      architecture: [
-        'Frontend Architecture: Structured AngularJS client-side controllers and data two-way bindings',
-        'API Integration: Asynchronous REST fetch handlers for OpenWeatherMap and data.gov.in endpoints',
-        'State Management: Local storage persistence for user configuration, selected crops, and theme preferences'
-      ],
-      githubUrl: 'https://github.com/ayush-justdev',
-      status: 'Completed Web Application'
     }
   };
 
@@ -315,7 +268,7 @@ const ProjectsManager = (function () {
 
 /**
  * Project Showcase Controller & Isolated 3D Screenshot Carousel Engine
- * 1. Outer Navigation: Switch between projects (01 AgriSmart, 02 SpotOnJalgaon, 03 Smart AgriTech)
+ * 1. Outer Navigation: Switch between projects (01 AgriSmart, 02 SpotOnJalgaon)
  * 2. Inner 3D Carousel: Manages floating screenshot stack (prev/active/next) strictly confined to right column
  */
 const ProjectShowcaseController = (function () {
@@ -326,8 +279,7 @@ const ProjectShowcaseController = (function () {
 
   const PROJECT_TITLES = [
     { title: 'AGRISMART', color: 'var(--rgb-cyan)' },
-    { title: 'SPOTONJALGAON', color: '#10b981' },
-    { title: 'SMART AGRITECH', color: 'var(--rgb-magenta)' }
+    { title: 'SPOTONJALGAON', color: '#10b981' }
   ];
 
   /**
@@ -535,7 +487,7 @@ const ProjectShowcaseController = (function () {
   }
 
   /**
-   * Switch active project card (01 AgriSmart, 02 SpotOnJalgaon, 03 Smart AgriTech)
+   * Switch active project card (01 AgriSmart, 02 SpotOnJalgaon)
    */
   function switchProject(targetIndex) {
     const cards = document.querySelectorAll('.project-showcase-card');
